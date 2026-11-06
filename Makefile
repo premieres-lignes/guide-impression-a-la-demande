@@ -39,6 +39,8 @@ tectonic:
 #    make site SITE_URL=https://guide.premiereslignes.studio/
 # ---------------------------------------------------------------------
 SITE_URL ?= https://guide.premiereslignes.studio/
+# Pages intérieures du PDF montrées en éventail sur l'image d'aperçu
+OG_PAGES ?= 13 17
 SITE_HOST = $(word 2,$(subst /, ,$(SITE_URL)))
 CHROME   ?= $(shell command -v google-chrome || command -v chromium || command -v chromium-browser)
 
@@ -52,10 +54,13 @@ site: $(FONTS)
 	cp images/youtube/*.jpg docs/img/youtube/
 	sed 's#{{SITE_URL}}#$(SITE_URL)#g' site/index.html > docs/index.html
 	pdftoppm -r 110 -png -f 1 -l 1 -singlefile $(PDF) docs/couverture
+	pdftoppm -r 90 -png -f $(word 1,$(OG_PAGES)) -l $(word 1,$(OG_PAGES)) -singlefile $(PDF) docs/_og-a
+	pdftoppm -r 90 -png -f $(word 2,$(OG_PAGES)) -l $(word 2,$(OG_PAGES)) -singlefile $(PDF) docs/_og-b
 	cp site/og-image.html docs/_og.html
-	"$(CHROME)" --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 \
+	"$(CHROME)" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+	  --window-size=1200,630 --virtual-time-budget=3000 \
 	  --screenshot=$(CURDIR)/docs/og-image.png file://$(CURDIR)/docs/_og.html 2>/dev/null
-	rm docs/_og.html
+	rm -f docs/_og.html docs/_og-a.png docs/_og-b.png
 	case "$(SITE_HOST)" in *.github.io) rm -f docs/CNAME ;; *) echo "$(SITE_HOST)" > docs/CNAME ;; esac
 	touch docs/.nojekyll
 	@echo "==> docs/ à jour pour $(SITE_URL)"

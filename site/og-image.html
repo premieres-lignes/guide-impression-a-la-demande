@@ -1,7 +1,9 @@
 <!doctype html>
 <!-- Modèle de l'image d'aperçu réseaux sociaux (1200×630).
      Rendu en PNG par « make site » via Chrome headless → docs/og-image.png.
-     Chemins relatifs à docs/ (le fichier y est copié avant le rendu). -->
+     Le fichier est copié dans docs/ avant le rendu : chemins relatifs à docs/.
+     Images utilisées : couverture.png (couverture), _og-a.png / _og-b.png
+     (pages intérieures, générées depuis le PDF, cf. OG_PAGES dans le Makefile). -->
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -9,52 +11,127 @@
   @font-face { font-family: "Alfa Slab One"; src: url("fonts/AlfaSlabOne-Regular.ttf"); }
   @font-face { font-family: "Zilla Slab"; font-style: italic; font-weight: 700; src: url("fonts/ZillaSlab-BoldItalic.ttf"); }
   @font-face { font-family: "Lato"; font-weight: 700; src: url("fonts/Lato-Bold.ttf"); }
-  * { box-sizing: border-box; margin: 0; }
+  @font-face { font-family: "Lato"; font-weight: 400; src: url("fonts/Lato-Regular.ttf"); }
+
+  :root { --orange:#FF7A00; --clair:#FFA033; --fonce:#E35A00; --noir:#111; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    position: relative; color: #111;
-    background: radial-gradient(ellipse at 35% 45%, #FFA033 0%, #FF7A00 45%, #E35A00 100%);
-    font-family: "Lato", sans-serif;
+    position: relative; color: var(--noir); font-family: "Lato", sans-serif;
+    background:
+      radial-gradient(circle at 78% 42%, rgba(255,190,90,.55) 0%, rgba(255,190,90,0) 38%),
+      radial-gradient(ellipse at 30% 40%, var(--clair) 0%, var(--orange) 48%, var(--fonce) 100%);
   }
-  .text { position: absolute; left: 64px; top: 54px; width: 720px; }
-  .kicker { font: italic 700 26px "Zilla Slab", serif; margin-bottom: 18px; }
-  h1 { font-family: "Alfa Slab One", serif; font-weight: 400; text-transform: uppercase; line-height: .98; }
-  .liaison { display: block; font: italic 700 42px/1 "Zilla Slab", serif; text-transform: none; }
-  .big { display: block; font-size: 86px; }
-  .indent { padding-left: 230px; }
-  .line { display: flex; align-items: baseline; gap: 12px; }
-  .mid { font-size: 58px; }
-  .badge {
-    position: absolute; left: 64px; bottom: 50px;
-    display: flex; align-items: center; gap: 18px;
+
+  /* ---------- Colonne texte ---------- */
+  .text { position: absolute; left: 62px; top: 50px; width: 600px; }
+  .tag {
+    display: inline-block; background: var(--noir); color: var(--orange);
+    font: 400 19px "Alfa Slab One", serif; letter-spacing: .04em; text-transform: uppercase;
+    padding: 9px 16px 8px; border-radius: 6px; margin-bottom: 20px;
   }
-  .badge .pill {
-    background: #111; color: #FF7A00; font: 400 26px "Alfa Slab One", serif;
-    text-transform: uppercase; padding: 12px 22px; border-radius: 8px;
+  h1 { font-family: "Alfa Slab One", serif; font-weight: 400; text-transform: uppercase; line-height: .94; }
+  h1 .big { display: block; font-size: 80px; letter-spacing: -.01em; }
+  h1 .liaison { font: italic 700 42px/1 "Zilla Slab", serif; text-transform: none; }
+  h1 .row { display: flex; align-items: baseline; gap: 14px; }
+  h1 .row.indent { padding-left: 4px; }
+  h1 .mid { font-size: 56px; }
+  .lead { margin-top: 24px; font: 700 28px/1.25 "Lato", sans-serif; max-width: 560px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .chips span {
+    font: 700 19px "Lato", sans-serif; padding: 6px 14px; border-radius: 999px;
+    border: 2.5px solid var(--noir); background: rgba(255,255,255,.18);
   }
-  .badge .brand { font: 400 22px "Alfa Slab One", serif; text-transform: uppercase; }
-  .cover {
-    position: absolute; right: 64px; top: 50%; width: 300px;
-    transform: translateY(-50%) rotate(4deg);
-    border-radius: 4px; box-shadow: 0 30px 60px -18px rgba(0,0,0,.6);
+
+  /* ---------- Visuel : pages en éventail + livre 3D ---------- */
+  .stage { position: absolute; right: 56px; top: 52px; width: 400px; height: 470px; }
+  .sheet {
+    position: absolute; width: 300px; height: 424px; background: #fff;
+    border-radius: 3px; overflow: hidden; box-shadow: 0 18px 40px -12px rgba(0,0,0,.45);
   }
+  .sheet img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .sheet.a { left: 0px; top: 44px; transform: rotate(-10deg); }
+  .sheet.b { left: 120px; top: 30px; transform: rotate(9deg); }
+
+  .book-wrap { position: absolute; left: 40px; top: 10px; perspective: 1500px; }
+  .book {
+    position: relative; width: 300px; height: 424px;
+    transform-style: preserve-3d; transform: rotateY(-28deg) rotateX(3deg);
+  }
+  .book img.cover {
+    position: absolute; inset: 0; width: 300px; height: 424px;
+    transform: translateZ(17px); border-radius: 0 3px 3px 0;
+  }
+  /* Tranche des pages (côté droit) */
+  .book::before {
+    content: ""; position: absolute; left: 0; top: 4px; width: 32px; height: 416px;
+    transform: translateX(283px) rotateY(90deg);
+    background: repeating-linear-gradient(90deg, #fff 0 2px, #e9e4dc 2px 3px);
+  }
+  /* Quatrième de couverture + ombre portée */
+  .book::after {
+    content: ""; position: absolute; inset: 0; transform: translateZ(-17px);
+    background: var(--fonce); border-radius: 0 3px 3px 0;
+    box-shadow: -18px 22px 60px 6px rgba(0,0,0,.5);
+  }
+  /* Reflet sur la couverture */
+  .shine {
+    position: absolute; inset: 0; transform: translateZ(17.5px); pointer-events: none;
+    background: linear-gradient(105deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.22) 52%, rgba(255,255,255,0) 64%);
+  }
+
+  /* Pastille « gratuit » */
+  .sticker {
+    position: absolute; right: -26px; top: -18px; z-index: 5;
+    width: 142px; height: 142px; border-radius: 50%;
+    background: var(--noir); color: var(--orange);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform: rotate(12deg); box-shadow: 0 12px 28px -8px rgba(0,0,0,.6);
+    outline: 4px solid var(--orange); outline-offset: -12px;
+  }
+  .sticker b { font: 400 34px/1 "Alfa Slab One", serif; }
+  .sticker i { font: italic 700 22px/1.1 "Zilla Slab", serif; color: #fff; }
+
+  /* ---------- Bandeau de marque ---------- */
+  .band {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 66px;
+    background: var(--noir); display: flex; align-items: center; justify-content: space-between;
+    padding: 0 62px;
+  }
+  .band .brand { font: 400 24px "Alfa Slab One", serif; color: var(--orange); text-transform: uppercase; letter-spacing: .03em; }
+  .band .url { font: 700 23px "Lato", sans-serif; color: #fff; }
+  .band .url span { color: var(--orange); }
 </style>
 </head>
 <body>
   <div class="text">
-    <p class="kicker">Pour petits éditeurs &amp; auteurs indépendants</p>
+    <span class="tag">Guide PDF · Édition 2026</span>
     <h1>
-      <span class="liaison">le guide de</span>
       <span class="big">L’impression</span>
-      <span class="liaison indent">à la</span>
-      <span class="big">demande</span>
-      <span class="line"><span class="liaison">en</span><span class="mid">France</span></span>
+      <span class="row indent"><span class="liaison">à la</span><span class="big">demande</span></span>
+      <span class="row"><span class="liaison">en</span><span class="mid">France</span></span>
     </h1>
+    <p class="lead">Règles, prix, acteurs : tout pour publier votre livre papier sans stock.</p>
+    <div class="chips">
+      <span>Amazon KDP</span><span>BoD</span><span>IngramSpark</span><span>Loi Lang</span><span>ISBN</span>
+    </div>
   </div>
-  <div class="badge">
-    <span class="pill">↓ Guide PDF gratuit</span>
+
+  <div class="stage">
+    <div class="sheet a"><img src="_og-a.png" alt=""></div>
+    <div class="sheet b"><img src="_og-b.png" alt=""></div>
+    <div class="book-wrap">
+      <div class="book">
+        <img class="cover" src="couverture.png" alt="">
+        <div class="shine"></div>
+      </div>
+    </div>
+    <div class="sticker"><b>100 %</b><i>gratuit</i></div>
+  </div>
+
+  <div class="band">
     <span class="brand">Premières Lignes</span>
+    <span class="url">guide.<span>premiereslignes</span>.studio</span>
   </div>
-  <img class="cover" src="couverture.png" alt="">
 </body>
 </html>
