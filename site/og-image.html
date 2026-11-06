@@ -25,11 +25,14 @@
 
   /* ---------- Colonne texte ---------- */
   .text { position: absolute; left: 62px; top: 50px; width: 600px; }
-  .tag {
-    display: inline-block; background: var(--noir); color: var(--orange);
-    font: 400 19px "Alfa Slab One", serif; letter-spacing: .04em; text-transform: uppercase;
-    padding: 9px 16px 8px; border-radius: 6px; margin-bottom: 20px;
+  .cta {
+    display: inline-flex; align-items: center; gap: 16px;
+    background: var(--noir); color: var(--orange);
+    font: 400 38px/1 "Alfa Slab One", serif; letter-spacing: .03em; text-transform: uppercase;
+    padding: 16px 28px 15px 22px; border-radius: 10px; margin-bottom: 24px;
+    box-shadow: 0 7px 0 rgba(0,0,0,.28);
   }
+  .cta svg { width: 40px; height: 40px; flex: none; }
   h1 { font-family: "Alfa Slab One", serif; font-weight: 400; text-transform: uppercase; line-height: .94; }
   h1 .big { display: block; font-size: 80px; letter-spacing: -.01em; }
   h1 .liaison { font: italic 700 42px/1 "Zilla Slab", serif; text-transform: none; }
@@ -95,17 +98,17 @@
   /* ---------- Bandeau de marque ---------- */
   .band {
     position: absolute; left: 0; right: 0; bottom: 0; height: 66px;
-    background: var(--noir); display: flex; align-items: center; justify-content: space-between;
+    background: var(--noir); display: flex; align-items: center; justify-content: center;
     padding: 0 62px;
   }
   .band .brand { font: 400 24px "Alfa Slab One", serif; color: var(--orange); text-transform: uppercase; letter-spacing: .03em; }
-  .band .url { font: 700 23px "Lato", sans-serif; color: #fff; }
+  .band .url { font: 700 26px "Lato", sans-serif; color: #fff; }
   .band .url span { color: var(--orange); }
 </style>
 </head>
 <body>
   <div class="text">
-    <span class="tag">Guide PDF · Édition 2026</span>
+    <span class="cta"><svg viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m6 10 6 6 6-6"/><path d="M4 20h16"/></svg>PDF gratuit</span>
     <h1>
       <span class="big">L’impression</span>
       <span class="row indent"><span class="liaison">à la</span><span class="big">demande</span></span>
@@ -130,7 +133,6 @@
   </div>
 
   <div class="band">
-    <span class="brand">Premières Lignes</span>
     <span class="url">guide.<span>premiereslignes</span>.studio</span>
   </div>
 </body>

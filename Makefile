@@ -61,6 +61,7 @@ site: $(FONTS)
 	  --window-size=1200,630 --virtual-time-budget=3000 \
 	  --screenshot=$(CURDIR)/docs/og-image.png file://$(CURDIR)/docs/_og.html 2>/dev/null
 	rm -f docs/_og.html docs/_og-a.png docs/_og-b.png
+	H=$$(md5sum docs/og-image.png | cut -c1-8); sed -i "s#og-image.png\"#og-image.png?v=$$H\"#g" docs/index.html
 	case "$(SITE_HOST)" in *.github.io) rm -f docs/CNAME ;; *) echo "$(SITE_HOST)" > docs/CNAME ;; esac
 	touch docs/.nojekyll
 	@echo "==> docs/ à jour pour $(SITE_URL)"
