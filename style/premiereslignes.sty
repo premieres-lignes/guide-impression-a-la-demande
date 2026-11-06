@@ -1,0 +1,322 @@
+% =====================================================================
+%  premiereslignes.sty — charte graphique « Premières Lignes »
+%  Orange vif + noir, titres en slab serif très gras, mots de liaison
+%  en italique (comme les miniatures YouTube de la chaîne).
+%
+%  Tout ce qui touche à l'apparence est ici : couleurs, polices,
+%  titres, encadrés, couverture, bannière newsletter.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{premiereslignes}[2026/11/06 Charte graphique Premieres Lignes]
+
+% --- Paquets de base ---------------------------------------------------
+\RequirePackage[table]{xcolor}
+\RequirePackage{fontspec}
+\RequirePackage[a4paper,top=2.6cm,bottom=2.6cm,left=2.3cm,right=2.3cm,headheight=16pt]{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\usetikzlibrary{babel,positioning}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{eso-pic}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{enumitem}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{array}
+\RequirePackage{xfp}
+\RequirePackage{siunitx}
+\RequirePackage{microtype}
+\RequirePackage{csquotes}
+\RequirePackage{hyperref}
+\RequirePackage{qrcode}
+
+% =====================================================================
+%  1. COULEURS  (modifiez les codes HTML pour changer toute la charte)
+% =====================================================================
+\definecolor{plOrange}{HTML}{FF7A00}       % orange principal
+\definecolor{plOrangeClair}{HTML}{FFA033}  % centre du dégradé
+\definecolor{plOrangeFonce}{HTML}{E35A00}  % bords du dégradé, liens
+\definecolor{plNoir}{HTML}{111111}         % texte et titres
+\definecolor{plCreme}{HTML}{FFF2E3}        % fond des encadrés
+\definecolor{plGris}{HTML}{555555}
+
+% =====================================================================
+%  2. POLICES
+%  Si les fichiers sont présents dans fonts/ (voir « make fonts »),
+%  on utilise Alfa Slab One / Zilla Slab / Lato. Sinon, repli
+%  automatique sur les polices TeX Gyre livrées avec TeX Live.
+% =====================================================================
+\IfFileExists{fonts/AlfaSlabOne-Regular.ttf}{%
+  \newfontfamily\pltitre{AlfaSlabOne-Regular.ttf}[Path=fonts/,Ligatures=TeX]%
+}{%
+  \PackageWarning{premiereslignes}{Alfa Slab One absente : repli sur TeX Gyre Bonum}%
+  \newfontfamily\pltitre{texgyrebonum-bold.otf}[Ligatures=TeX]%
+}
+\IfFileExists{fonts/ZillaSlab-BoldItalic.ttf}{%
+  \newfontfamily\placcent{ZillaSlab-BoldItalic.ttf}[Path=fonts/,Ligatures=TeX]%
+}{%
+  \newfontfamily\placcent{texgyrebonum-bolditalic.otf}[Ligatures=TeX]%
+}
+\IfFileExists{fonts/Lato-Regular.ttf}{%
+  \setmainfont{Lato}[Path=fonts/,Extension=.ttf,Ligatures=TeX,
+    UprightFont=*-Regular,BoldFont=*-Bold,
+    ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]%
+}{%
+  \setmainfont{texgyreheros}[Extension=.otf,Ligatures=TeX,
+    UprightFont=*-regular,BoldFont=*-bold,
+    ItalicFont=*-italic,BoldItalicFont=*-bolditalic]%
+}
+\linespread{1.12}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+
+% =====================================================================
+%  3. TITRES DE SECTIONS
+% =====================================================================
+\titleformat{\section}[display]
+  {\normalfont\color{plNoir}\raggedright}
+  {\colorbox{plOrange}{\pltitre\fontsize{26}{26}\selectfont\color{plNoir}\,\thesection\,}}
+  {12pt}
+  {\pltitre\fontsize{26}{31}\selectfont\MakeUppercase}
+  [\vspace{4pt}{\color{plOrange}\titlerule[3pt]}]
+\titlespacing*{\section}{0pt}{0pt}{16pt}
+
+\titleformat{\subsection}
+  {\pltitre\fontsize{15}{19}\selectfont\color{plNoir}\raggedright}
+  {\textcolor{plOrange}{\thesubsection}}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{16pt}{6pt}
+
+\titleformat{\subsubsection}
+  {\placcent\fontsize{13}{16}\selectfont\color{plOrangeFonce}}
+  {}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{10pt}{3pt}
+
+% =====================================================================
+%  4. EN-TÊTE / PIED DE PAGE
+% =====================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrule}{{\color{plOrange}\hrule height 2pt width\headwidth}}
+\fancyhead[R]{\small\placcent\nouppercase{\leftmark}}
+\fancyfoot[L]{\small\pltitre\textcolor{plOrangeFonce}{\MakeUppercase{\plMarque}}}
+\fancyfoot[R]{\small\pltitre\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrule}{}%
+  \fancyfoot[R]{\small\pltitre\thepage}}
+
+% =====================================================================
+%  5. LISTES
+% =====================================================================
+\setlist[itemize]{leftmargin=1.4em,itemsep=2pt,topsep=3pt,
+  label={\raisebox{0.18ex}{\textcolor{plOrange}{\rule{0.48em}{0.48em}}}}}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=2pt,topsep=3pt,
+  label={\pltitre\textcolor{plOrangeFonce}{\arabic*.}}}
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{leftmargin=1.8em,itemsep=3pt,topsep=3pt,
+  label={\tikz[baseline=-0.1ex]\draw[plOrange,line width=1.2pt] (0,0) rectangle (0.75em,0.75em);}}
+
+% =====================================================================
+%  6. TABLEAUX
+% =====================================================================
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\entete}{\rowcolor{plOrange}}            % ligne d'en-tête orange
+\renewcommand{\arraystretch}{1.3}
+
+% =====================================================================
+%  7. MONTANTS CALCULÉS  —  \eur{expression}  →  « 4,35 € »
+%  L'expression est évaluée par xfp (ex. \eur{\exPrixTTC/1.055}).
+% =====================================================================
+\sisetup{mode=text,output-decimal-marker={,},group-separator={\,},group-minimum-digits=4}
+\newcommand{\eur}[1]{%
+  \edef\pl@tmp{\fpeval{round(#1,2)}}%
+  \num[round-mode=places,round-precision=2]{\pl@tmp}\,€}
+\newcommand{\entier}[1]{%
+  \edef\pl@tmp{\fpeval{round(#1,0)}}%
+  \num{\pl@tmp}}
+\newcommand{\pct}[1]{%
+  \edef\pl@tmp{\fpeval{round(#1,1)}}%
+  \num{\pl@tmp}\,\%}
+
+% =====================================================================
+%  8. ENCADRÉS
+% =====================================================================
+\tcbset{plbase/.style={enhanced,breakable,arc=0pt,outer arc=0pt,
+  boxrule=0pt,left=10pt,right=10pt,top=8pt,bottom=8pt,
+  before skip=10pt,after skip=10pt}}
+
+% Astuce / conseil pratique
+\newtcolorbox{astuce}[1][Astuce]{plbase,colback=plCreme,
+  borderline west={4pt}{0pt}{plOrange},
+  title={#1},fonttitle=\pltitre,coltitle=plOrangeFonce,
+  colbacktitle=plCreme,titlerule=0pt,toptitle=2pt,bottomtitle=0pt}
+
+% Point de vigilance
+\newtcolorbox{attention}[1][Attention]{plbase,colback=white,
+  borderline west={4pt}{0pt}{plNoir},
+  borderline={0.4pt}{0pt}{plNoir!25},
+  title={\tikz[baseline=0pt]\fill[plOrange] (0,0)--(0.7em,0)--(0.35em,0.62em)--cycle;~#1},fonttitle=\pltitre,coltitle=plNoir,
+  colbacktitle=white,titlerule=0pt,toptitle=2pt,bottomtitle=0pt}
+
+% Fiche acteur : \begin{fiche}{Nom}{site.fr} ... \end{fiche}  (site vide = pas de lien)
+\newtcolorbox{fiche}[2]{plbase,colback=white,
+  borderline={1pt}{0pt}{plOrange},
+  title={\MakeUppercase{#1}\hfill\if\relax\detokenize{#2}\relax\else{\normalfont\small\hypersetup{urlcolor=plNoir}\href{https://#2}{#2}}\fi},
+  fonttitle=\pltitre,coltitle=plNoir,colbacktitle=plOrange,
+  toptitle=4pt,bottomtitle=4pt}
+
+% Chiffre clé : \chiffrecle{3 €}{explication}
+\newcommand{\chiffrecle}[2]{%
+  \begin{tcolorbox}[enhanced,colback=plOrange,boxrule=0pt,arc=3pt,
+    sidebyside,lefthand width=3.4cm,segmentation hidden,
+    sidebyside align=center,left=10pt,right=10pt,top=8pt,bottom=8pt,
+    before skip=8pt,after skip=8pt]
+    \centering{\pltitre\fontsize{22}{24}\selectfont\color{plNoir}#1}
+  \tcblower
+    \color{plNoir}#2
+  \end{tcolorbox}}
+
+% Petit texte gris (sources, dates)
+\newcommand{\source}[1]{\par{\footnotesize\color{plGris}\textit{#1}}\par}
+
+% =====================================================================
+%  9. BANNIÈRE NEWSLETTER
+%  Textes réglables dans main.tex (\plNewsletterTitre, etc.)
+% =====================================================================
+\newcommand{\bannierenewsletter}{%
+  \begin{tcolorbox}[enhanced,colback=plNoir,boxrule=0pt,arc=6pt,
+    left=16pt,right=16pt,top=14pt,bottom=14pt,
+    sidebyside,lefthand ratio=0.74,segmentation hidden,
+    sidebyside align=center,before skip=10pt,after skip=10pt]
+    {\raggedright\color{plOrange}\pltitre\fontsize{19}{23}\selectfont\plNewsletterTitre\par}
+    \vspace{6pt}
+    {\raggedright\color{white}\plNewsletterTexte\par}
+    \vspace{10pt}
+    \href{\plNewsletterURL}{\colorbox{plOrange}{\pltitre\color{plNoir}\strut~\plNewsletterBouton~}}%
+    \hspace{0.8em}{\color{white}\small\plNewsletterAffichage}
+  \tcblower
+    \centering
+    \colorbox{white}{\qrcode[height=2.5cm]{\plNewsletterURL}}\par
+    \vspace{3pt}{\color{white}\scriptsize Scannez-moi}
+  \end{tcolorbox}}
+
+% =====================================================================
+%  9 bis. CHAÎNE YOUTUBE ET INTERVIEWS
+%  Textes réglables dans main.tex (\plYoutubeURL, etc.)
+%  Liste des vidéos : donnees/interviews.tex
+% =====================================================================
+\newcommand{\plYoutubeVideo}[1]{https://www.youtube.com/watch?v=\detokenize{#1}}
+
+% Bouton « play » aux couleurs de la charte (taille = hauteur)
+\newcommand{\boutonplay}[1][1em]{%
+  \tikz[baseline=-0.1ex,x=#1,y=#1]{%
+    \fill[plOrange,rounded corners=0.18] (0,-0.5) rectangle (1.42,0.5);
+    \fill[plNoir] (0.55,-0.25) -- (0.55,0.25) -- (0.98,0) -- cycle;}}
+
+% Miniature cliquable avec bouton play : \miniature[largeur]{ID}
+\newlength{\pl@largeurplay}
+\newcommand{\miniature}[2][\linewidth]{%
+  \setlength{\pl@largeurplay}{#1}%
+  \setlength{\pl@largeurplay}{0.11\pl@largeurplay}%
+  \href{\plYoutubeVideo{#2}}{%
+    \begin{tikzpicture}
+      \node[inner sep=0pt] (img)
+        {\includegraphics[width=#1]{images/youtube/\detokenize{#2}.jpg}};
+      \node at (img.center) {\boutonplay[\pl@largeurplay]};
+    \end{tikzpicture}}}
+
+% Carte d'interview (utilisée dans une grille tcbraster)
+\newcommand{\interview}[4]{%
+  \begin{tcolorbox}[enhanced,colback=white,boxrule=0pt,arc=0pt,
+    borderline south={3pt}{0pt}{plOrange},
+    left=0pt,right=0pt,top=0pt,bottom=6pt]
+    \miniature{#1}\par\vspace{5pt}
+    {\raggedright\pltitre\small\href{\plYoutubeVideo{#1}}{#2}\par}
+    {\raggedright\placcent\small\color{plOrangeFonce}#3\par}
+    \vspace{2pt}{\raggedright\footnotesize#4\par}
+  \end{tcolorbox}}
+
+\newcommand{\grilleinterviews}{%
+  \begin{tcbraster}[raster columns=3,raster equal height=rows,
+    raster column skip=10pt,raster row skip=12pt]
+    \listeinterviews
+  \end{tcbraster}}
+
+% Encadré « À voir » renvoyant vers une interview : \avoir{ID}{texte}
+\newcommand{\avoir}[2]{%
+  \begin{tcolorbox}[enhanced,colback=plCreme,boxrule=0pt,arc=0pt,
+    borderline west={4pt}{0pt}{plNoir},
+    sidebyside,lefthand width=3.6cm,segmentation hidden,
+    sidebyside align=center,left=8pt,right=10pt,top=8pt,bottom=8pt,
+    before skip=10pt,after skip=10pt]
+    \miniature[3.6cm]{#1}
+  \tcblower
+    {\pltitre\color{plOrangeFonce}À VOIR SUR LA CHAÎNE}\par\vspace{2pt}
+    #2\par\vspace{3pt}
+    {\small\href{\plYoutubeVideo{#1}}{Regarder l’interview →}}
+  \end{tcolorbox}}
+
+% Bannière chaîne YouTube
+\newcommand{\banniereyoutube}{%
+  \begin{tcolorbox}[enhanced,colback=white,boxrule=0pt,arc=6pt,
+    borderline={2pt}{0pt}{plNoir},
+    left=16pt,right=16pt,top=14pt,bottom=14pt,
+    sidebyside,lefthand ratio=0.76,segmentation hidden,
+    sidebyside align=center,before skip=10pt,after skip=10pt]
+    {\raggedright\pltitre\fontsize{18}{22}\selectfont\boutonplay[0.9em]~\plYoutubeTitre\par}
+    \vspace{6pt}
+    {\raggedright\plYoutubeTexte\par}
+    \vspace{10pt}
+    \href{\plYoutubeAbonnement}{\colorbox{plNoir}{\pltitre\color{plOrange}\strut~\plYoutubeBouton~}}%
+    \hspace{0.8em}{\small\plYoutubeAffichage}
+  \tcblower
+    \centering
+    \qrcode[height=2.4cm]{\plYoutubeURL}\par
+    \vspace{3pt}{\scriptsize Scannez-moi}
+  \end{tcolorbox}}
+
+% =====================================================================
+%  10. COUVERTURE
+% =====================================================================
+\newcommand{\fonddegrade}{%
+  \AddToShipoutPictureBG*{%
+    \begin{tikzpicture}[remember picture,overlay]
+      \shade[inner color=plOrangeClair,outer color=plOrangeFonce]
+        (current page.south west) rectangle (current page.north east);
+    \end{tikzpicture}}}
+
+% Ligne de titre en très gros, ajustée à la largeur de la page
+\newcommand{\grosmot}[1]{\resizebox{\linewidth}{!}{\pltitre #1}\par}
+% Mot de liaison en italique
+\newcommand{\liaison}[2][28]{{\placcent\fontsize{#1}{#1}\selectfont #2}\par}
+
+\newcommand{\couverture}{%
+  \begingroup\def\thepage{couverture}%
+  \begin{titlepage}
+    \fonddegrade
+    \color{plNoir}
+    \vspace*{-0.6cm}
+    {\placcent\Large\plSurtitre}\par
+    \vspace{1.4cm}
+    \liaison{le guide de}\vspace{2pt}
+    \grosmot{L’IMPRESSION}
+    \vspace{-2pt}\hspace*{0.35\linewidth}\liaison[40]{à la}
+    \vspace{-6pt}\grosmot{DEMANDE}
+    \vspace{2pt}{\placcent\fontsize{34}{34}\selectfont en}\enspace\resizebox{0.5\linewidth}{!}{\pltitre FRANCE}\par
+    \vspace{0.8cm}
+    {\Large\bfseries \plSousTitre}\par
+    \vspace{4pt}
+    {\large \plPublic}\par
+    \vfill
+    \bannierenewsletter
+    \vspace{6pt}
+    {\small\pltitre\MakeUppercase{\plMarque}}\hfill{\small \plDateEdition}
+  \end{titlepage}\endgroup}
+
+% =====================================================================
+%  11. LIENS PDF
+% =====================================================================
+\hypersetup{colorlinks=true,linkcolor=plNoir,urlcolor=plOrangeFonce,
+  citecolor=plOrangeFonce,pdfborder={0 0 0}}
+
+\endinput

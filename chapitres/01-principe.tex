@@ -1,0 +1,91 @@
+% ---------------------------------------------------------------------
+\section{L’impression à la demande, c’est quoi ?}
+% ---------------------------------------------------------------------
+
+\subsection{Le principe : imprimer après la vente}
+
+Dans le modèle classique, l’éditeur fait imprimer un \emph{tirage}
+(500, 1\,000, 3\,000 exemplaires…), le stocke chez un distributeur,
+puis espère le vendre. Les invendus reviennent (les \emph{retours}) et
+finissent parfois au pilon.
+
+L’impression à la demande renverse la logique : \textbf{le livre
+n’existe que sous forme de fichiers} (un PDF intérieur, un PDF de
+couverture) tant que personne ne l’a acheté. Quand un lecteur ou un
+libraire passe commande, l’exemplaire est imprimé — souvent à l’unité —
+puis expédié, en général sous quelques jours.
+
+\begin{center}
+\begin{tikzpicture}[
+  etape/.style={draw=plOrange,line width=1.2pt,fill=plCreme,
+    minimum width=2.9cm,minimum height=1.2cm,align=center,
+    font=\small\bfseries,text width=2.7cm},
+  fleche/.style={-latex,line width=1.6pt,plNoir}]
+  \node[etape] (a) {Commande\\du lecteur};
+  \node[etape,right=0.7cm of a] (b) {Plateforme\\ou distributeur};
+  \node[etape,right=0.7cm of b] (c) {Impression\\numérique};
+  \node[etape,right=0.7cm of c] (d) {Expédition\\(lecteur ou libraire)};
+  \draw[fleche] (a) -- (b);
+  \draw[fleche] (b) -- (c);
+  \draw[fleche] (c) -- (d);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Trois façons d’imprimer un livre}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{P{3.1cm}LLL}
+\entete & \textbf{Offset} & \textbf{Numérique petit tirage} & \textbf{Impression à la demande} \\
+Quantité typique & à partir de 500 – 1\,000 ex. & 30 à 500 ex. & 1 ex. à la commande \\
+Coût unitaire & le plus bas à fort volume & moyen & le plus élevé \\
+Mise de départ & élevée (plaques, calage) & modérée & quasi nulle \\
+Stock & oui, à financer et stocker & petit stock & aucun \\
+Délai & 2 à 4 semaines & 1 à 2 semaines & quelques jours par commande \\
+Qualité & référence, tous papiers & très bonne & bonne à très bonne, choix de papiers limité \\
+Idéal pour & best-sellers, beaux livres & lancements, salons & fonds, tests, niches, autoédition \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Pourquoi c’est intéressant pour un petit éditeur ou un auteur}
+
+\begin{itemize}
+  \item \textbf{Aucun stock à financer} : la trésorerie n’est pas
+        immobilisée, pas de frais d’entrepôt, pas de pilon.
+  \item \textbf{Un livre jamais épuisé} : comme il n’y a pas de stock
+        qui s’écoule, le livre reste en vente aussi longtemps que vous
+        le souhaitez. Même un titre ancien qui ne se vend qu’à quelques
+        exemplaires par an continue de rapporter, sans rien coûter à
+        stocker.
+  \item \textbf{Un risque limité} : on peut tester un titre, un genre,
+        une couverture, et corriger le fichier à tout moment.
+  \item \textbf{Un accès direct aux grands canaux} : Amazon, Fnac,
+        Cultura, Decitre… et, selon la plateforme, les librairies
+        indépendantes via Dilicom.
+\end{itemize}
+
+\subsection{Les limites à connaître}
+
+\begin{itemize}
+  \item \textbf{Une marge unitaire plus faible} qu’en offset : chaque
+        exemplaire coûte plus cher à fabriquer.
+  \item \textbf{Une présence en librairie difficile} : les livres en IAD
+        sont commandables, mais rarement en rayon. Sans diffuseur
+        (représentants qui démarchent les libraires), le livre ne se
+        vend pas « tout seul ».
+  \item \textbf{Des finitions limitées} : formats standards, quelques
+        papiers, peu ou pas de dorure, vernis sélectif ou rabats.
+  \item \textbf{Une qualité qui peut varier} : selon l’imprimerie qui
+        fabrique l’exemplaire, les couleurs, le centrage du texte ou la
+        coupe des pages peuvent légèrement différer. Avant de lancer la
+        vente, commandez toujours un exemplaire test (une « épreuve »)
+        pour vérifier le résultat.
+\end{itemize}
+
+\begin{astuce}[En résumé]
+L’IAD n’est pas « l’édition au rabais » : c’est un \textbf{outil de
+fabrication et de logistique}. Beaucoup d’éditeurs combinent les deux :
+un petit tirage pour les salons et les librairies qui suivent le titre,
+l’IAD pour assurer la disponibilité permanente partout ailleurs.
+\end{astuce}

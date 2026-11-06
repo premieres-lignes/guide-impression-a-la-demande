@@ -1,0 +1,67 @@
+% =====================================================================
+%  L'impression à la demande en France — guide pratique
+%  Compilation : voir README.md  (make  ou  latexmk -xelatex main.tex)
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---------------------------------------------------------------------
+%  RÉGLAGES RAPIDES — changez ici les textes de la couverture,
+%  de la bannière newsletter et la marque.
+% ---------------------------------------------------------------------
+\newcommand{\plMarque}{Premières Lignes}
+\newcommand{\plSurtitre}{Guide pratique pour petits éditeurs \& auteurs indépendants}
+\newcommand{\plSousTitre}{Fonctionnement, règles, prix, acteurs : tout pour se lancer.}
+\newcommand{\plPublic}{Édition 2026}
+\newcommand{\plDateEdition}{Novembre 2026}
+
+\newcommand{\plNewsletterURL}{https://newsletter.premiereslignes.studio/}
+\newcommand{\plNewsletterAffichage}{newsletter.premiereslignes.studio}
+\newcommand{\plNewsletterTitre}{RECEVEZ LA SUITE DANS VOTRE BOÎTE MAIL}
+\newcommand{\plNewsletterTexte}{Chaque semaine, la newsletter \plMarque{} décrypte
+  l’édition indépendante : coulisses, chiffres, outils et entretiens
+  avec celles et ceux qui font bouger le livre.}
+\newcommand{\plNewsletterBouton}{JE M’ABONNE}
+
+\newcommand{\plYoutubeURL}{https://www.youtube.com/@premieres-lignes}
+\newcommand{\plYoutubeAbonnement}{https://www.youtube.com/@premieres-lignes?sub_confirmation=1}
+\newcommand{\plYoutubeAffichage}{youtube.com/@premieres-lignes}
+\newcommand{\plYoutubeTitre}{LES INTERVIEWS PREMIÈRES LIGNES}
+\newcommand{\plYoutubeTexte}{Des conversations sans filtre avec des auteurs et
+  des éditeurs qui racontent l’envers de leurs livres : écriture, édition,
+  autoédition, fabrication, vente.}
+\newcommand{\plYoutubeBouton}{VOIR LA CHAÎNE}
+
+% ---------------------------------------------------------------------
+\usepackage[french]{babel}
+\usepackage{style/premiereslignes}
+\input{donnees/parametres}
+\input{donnees/interviews}
+
+\hypersetup{pdftitle={L'impression à la demande en France},
+  pdfauthor={\plMarque},
+  pdfsubject={Guide pratique de l'impression à la demande}}
+
+% =====================================================================
+\begin{document}
+
+\couverture
+
+% --- Page 2 : mode d'emploi + sommaire ---------------------------------
+\input{chapitres/00-avant-propos}
+\clearpage
+
+% --- Chapitres (commentez une ligne pour retirer un chapitre) ----------
+\input{chapitres/01-principe}       \clearpage
+\input{chapitres/02-fonctionnement} \clearpage
+\input{chapitres/03-cadre-legal}    \clearpage
+\input{chapitres/04-prix}           \clearpage
+\input{chapitres/05-acteurs}        \clearpage
+\input{chapitres/06-mise-en-place}  \clearpage
+\input{chapitres/07-ressources}    \clearpage
+\input{chapitres/08-interviews}
+
+% --- Rappel newsletter en fin de document -----------------------------
+\bannierenewsletter
+\vspace*{\fill}
+
+\end{document}

@@ -1,0 +1,43 @@
+% =====================================================================
+%  PARAMÈTRES DES EXEMPLES CHIFFRÉS
+%  Modifiez ces valeurs : tous les calculs du chapitre « Prix »
+%  sont refaits automatiquement à la compilation.
+%  Utilisez le point comme séparateur décimal (14.90, pas 14,90).
+% =====================================================================
+
+% --- Le livre pris en exemple ------------------------------------------
+\def\exPrixTTC{14.90}      % prix public TTC (€) fixé par l'éditeur
+\def\exPages{200}          % nombre de pages intérieures
+\def\exTVA{5.5}            % TVA sur le livre en France (%)
+
+% --- Amazon KDP, marketplace Amazon.fr, broché encre noire -------------
+%     Barème relevé en 2025-2026 pour 110 à 828 pages. À VÉRIFIER
+%     sur le calculateur officiel KDP avant toute décision.
+\def\kdpFixe{0.75}         % coût fixe par exemplaire (€)
+\def\kdpParPage{0.012}     % coût par page (€)
+\def\kdpTaux{0.60}         % taux de redevance (60 % au-dessus du seuil)
+\def\kdpTauxBas{0.50}      % taux sous le seuil de prix
+\def\kdpSeuil{9.99}        % seuil de prix (€) sous lequel le taux passe à 50 %
+
+% --- Vente en librairie via un service d'IAD distribué (BoD, etc.) ----
+\def\exCoutIAD{4.20}       % coût d'impression unitaire facturé (€ HT)
+\def\exRemiseLibraire{35}  % remise accordée au libraire (% du prix HT)
+\def\exCommission{10}      % part prélevée par la plateforme/distributeur (% du prix HT)
+
+% --- Comparaison avec un tirage offset ---------------------------------
+\def\offTirage{1000}       % nombre d'exemplaires imprimés
+\def\offTotal{2300}        % coût total du tirage (€ HT)
+\def\offStockage{0.35}     % stockage + logistique par exemplaire et par an (€)
+
+% =====================================================================
+%  Valeurs dérivées (ne pas modifier sauf si vous changez les formules)
+% =====================================================================
+\edef\exPrixHT{\fpeval{\exPrixTTC/(1+\exTVA/100)}}
+\edef\kdpImpression{\fpeval{\kdpFixe+\exPages*\kdpParPage}}
+\edef\kdpTauxApplique{\fpeval{(\exPrixTTC<\kdpSeuil) ? \kdpTauxBas : \kdpTaux}}
+\edef\kdpRedevance{\fpeval{\kdpTauxApplique*\exPrixHT-\kdpImpression}}
+\edef\libRemise{\fpeval{\exPrixHT*\exRemiseLibraire/100}}
+\edef\libCommission{\fpeval{\exPrixHT*\exCommission/100}}
+\edef\libMarge{\fpeval{\exPrixHT-\libRemise-\libCommission-\exCoutIAD}}
+\edef\offUnitaire{\fpeval{\offTotal/\offTirage}}
+\edef\offPointMort{\fpeval{\offTotal/\exCoutIAD}}

@@ -1,0 +1,136 @@
+% ---------------------------------------------------------------------
+\section{Les prix : combien ça coûte, combien ça rapporte}
+% ---------------------------------------------------------------------
+
+\begin{astuce}[Exemples recalculés automatiquement]
+Tous les montants de ce chapitre sont calculés à la compilation à partir
+du fichier \texttt{donnees/parametres.tex}. Changez le prix, le nombre
+de pages ou les taux : les tableaux se mettent à jour tout seuls.
+\end{astuce}
+
+\subsection{Où va l’argent d’un livre vendu en librairie ?}
+
+Dans la chaîne traditionnelle, la répartition du prix hors taxe d’un
+livre est souvent présentée ainsi (ordres de grandeur, très variables
+selon les maisons et les genres) :
+
+\begin{center}
+\small
+\begin{tabularx}{0.82\linewidth}{Lr}
+\entete \textbf{Acteur} & \textbf{Part du prix HT} \\
+Libraire (remise) & 30 à 40 \% \\
+Diffusion et distribution & 15 à 22 \% \\
+Fabrication (impression, papier) & 10 à 18 \% \\
+Éditeur (frais de structure, marge) & 15 à 20 \% \\
+Auteur (droits d’auteur) & 6 à 12 \% \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+L’IAD ne supprime pas ces maillons : il change surtout la
+\textbf{fabrication} (plus chère à l’unité) et supprime le
+\textbf{stock} et les \textbf{retours}. Quand vous vous autoéditez,
+vous cumulez les parts de l’auteur et de l’éditeur.
+
+\avoir{Wa_bN7TvI58}{\textbf{Pourquoi tes ventes de livres ne te rapportent
+rien} : la répartition du prix d’un livre, décortiquée en interview.}
+
+\subsection{Le coût d’impression d’un exemplaire}
+
+En IAD, le coût d’un exemplaire suit presque toujours la même logique :
+
+\begin{center}
+\pltitre\large coût = part fixe + (nombre de pages × coût par page)
+\end{center}
+
+Pour un roman broché en noir et blanc de 150 à 300 pages, comptez
+\textbf{environ 3 à 6~€ HT} l’exemplaire selon la plateforme, le format
+et le papier. La couleur peut multiplier ce coût par deux à cinq.
+
+\subsection{Exemple 1 — Vendre sur Amazon avec KDP}
+
+Barème Amazon.fr (broché, encre noire, 110 à 828 pages) : coût
+d’impression = \eur{\kdpFixe} + \entier{\exPages} pages × \num{\kdpParPage}~€.
+La redevance est de \pct{100*\kdpTaux} du prix HT moins le coût
+d’impression, et tombe à \pct{100*\kdpTauxBas} sous \eur{\kdpSeuil}
+(règle introduite en 2025).
+
+\begin{center}
+\begin{tabularx}{0.82\linewidth}{Lr}
+\entete \textbf{Livre de \entier{\exPages} pages vendu \eur{\exPrixTTC} TTC} & \\
+Prix hors taxe (TVA \pct{\exTVA}) & \eur{\exPrixHT} \\
+Taux de redevance appliqué & \pct{100*\kdpTauxApplique} \\
+Part conservée par Amazon & \eur{(1-\kdpTauxApplique)*\exPrixHT} \\
+Coût d’impression & \eur{\kdpImpression} \\
+\rowcolor{plCreme}\textbf{Redevance par exemplaire} & \textbf{\eur{\kdpRedevance}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\source{Barème relevé en 2025-2026 ; à vérifier sur le calculateur
+officiel KDP, qui fait foi. La redevance est versée par Amazon environ
+60 jours après la fin du mois de vente.}
+
+\subsection{Exemple 2 — Vendre en librairie via une plateforme d’IAD}
+
+Quand un libraire commande votre livre via une plateforme distribuée
+(BoD, Bookelis, IngramSpark…), il faut lui laisser une remise, et la
+plateforme se rémunère sur l’impression et/ou par une commission.
+
+\begin{center}
+\begin{tabularx}{0.82\linewidth}{Lr}
+\entete \textbf{Livre de \entier{\exPages} pages vendu \eur{\exPrixTTC} TTC} & \\
+Prix hors taxe & \eur{\exPrixHT} \\
+Remise libraire (\pct{\exRemiseLibraire}) & $-$\,\eur{\libRemise} \\
+Commission plateforme / distribution (\pct{\exCommission}) & $-$\,\eur{\libCommission} \\
+Impression à la demande & $-$\,\eur{\exCoutIAD} \\
+\rowcolor{plCreme}\textbf{Reste pour l’éditeur (et l’auteur)} & \textbf{\eur{\libMarge}} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{attention}[La remise libraire]
+En dessous de 30 \% de remise, la plupart des libraires refusent de
+commander, car ils perdent de l’argent. Une remise standard en
+librairie se situe autour de \textbf{30 à 35 \%} pour une commande à
+l’unité, davantage pour une mise en place. Les retours sont rarement
+acceptés en IAD : c’est un frein, mais aussi une protection pour vous.
+\end{attention}
+
+\subsection{Exemple 3 — IAD ou tirage offset ?}
+
+\begin{center}
+\begin{tabularx}{0.82\linewidth}{Lr}
+\entete \textbf{Comparaison} & \\
+Tirage offset & \entier{\offTirage} ex. pour \eur{\offTotal} \\
+Coût unitaire offset & \eur{\offUnitaire} \\
+Coût unitaire IAD & \eur{\exCoutIAD} \\
+Stockage et logistique (offset) & \eur{\offStockage} / ex. / an \\
+\rowcolor{plCreme}\textbf{Ventes à partir desquelles l’offset devient rentable} & \textbf{\entier{\offPointMort} ex.} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Autrement dit : si vous n’êtes pas raisonnablement sûr de vendre plus
+d’environ \entier{\offPointMort} exemplaires, l’IAD est moins risqué —
+sans compter le stockage, les retours et le pilon évités. Au-delà,
+un tirage (offset ou numérique) devient plus intéressant, et l’IAD peut
+prendre le relais une fois le stock écoulé.
+
+\subsection{Les autres coûts à prévoir}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{P{4.5cm}LP{3.2cm}}
+\entete \textbf{Poste} & \textbf{Commentaire} & \textbf{Ordre de grandeur} \\
+Frais de mise en ligne & gratuits chez KDP et IngramSpark ; offres gratuites
+  ou forfaits payants chez BoD, Bookelis et d’autres & 0 à quelques centaines d’€ \\
+Frais annuels & certaines offres facturent un abonnement par titre & 0 à quelques dizaines d’€ / an \\
+Épreuves et exemplaires auteur & au coût d’impression + port & 5 à 15~€ l’exemplaire livré \\
+Correction, mise en page & à ne pas négliger : c’est ce qui fait un livre pro & 300 à 2\,000~€ \\
+Couverture & illustrateur ou graphiste & 150 à 1\,000~€ \\
+ISBN, dépôt légal & gratuits en France & 0~€ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\source{Fourchettes indicatives observées sur le marché français ; à
+ajuster selon vos devis.}

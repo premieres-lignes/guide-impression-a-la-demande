@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- Modèle de l'image d'aperçu réseaux sociaux (1200×630).
+     Rendu en PNG par « make site » via Chrome headless → docs/og-image.png.
+     Chemins relatifs à docs/ (le fichier y est copié avant le rendu). -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Alfa Slab One"; src: url("fonts/AlfaSlabOne-Regular.ttf"); }
+  @font-face { font-family: "Zilla Slab"; font-style: italic; font-weight: 700; src: url("fonts/ZillaSlab-BoldItalic.ttf"); }
+  @font-face { font-family: "Lato"; font-weight: 700; src: url("fonts/Lato-Bold.ttf"); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative; color: #111;
+    background: radial-gradient(ellipse at 35% 45%, #FFA033 0%, #FF7A00 45%, #E35A00 100%);
+    font-family: "Lato", sans-serif;
+  }
+  .text { position: absolute; left: 64px; top: 54px; width: 720px; }
+  .kicker { font: italic 700 26px "Zilla Slab", serif; margin-bottom: 18px; }
+  h1 { font-family: "Alfa Slab One", serif; font-weight: 400; text-transform: uppercase; line-height: .98; }
+  .liaison { display: block; font: italic 700 42px/1 "Zilla Slab", serif; text-transform: none; }
+  .big { display: block; font-size: 86px; }
+  .indent { padding-left: 230px; }
+  .line { display: flex; align-items: baseline; gap: 12px; }
+  .mid { font-size: 58px; }
+  .badge {
+    position: absolute; left: 64px; bottom: 50px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .badge .pill {
+    background: #111; color: #FF7A00; font: 400 26px "Alfa Slab One", serif;
+    text-transform: uppercase; padding: 12px 22px; border-radius: 8px;
+  }
+  .badge .brand { font: 400 22px "Alfa Slab One", serif; text-transform: uppercase; }
+  .cover {
+    position: absolute; right: 64px; top: 50%; width: 300px;
+    transform: translateY(-50%) rotate(4deg);
+    border-radius: 4px; box-shadow: 0 30px 60px -18px rgba(0,0,0,.6);
+  }
+</style>
+</head>
+<body>
+  <div class="text">
+    <p class="kicker">Pour petits éditeurs &amp; auteurs indépendants</p>
+    <h1>
+      <span class="liaison">le guide de</span>
+      <span class="big">L’impression</span>
+      <span class="liaison indent">à la</span>
+      <span class="big">demande</span>
+      <span class="line"><span class="liaison">en</span><span class="mid">France</span></span>
+    </h1>
+  </div>
+  <div class="badge">
+    <span class="pill">↓ Guide PDF gratuit</span>
+    <span class="brand">Premières Lignes</span>
+  </div>
+  <img class="cover" src="couverture.png" alt="">
+</body>
+</html>
