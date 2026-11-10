@@ -32,15 +32,19 @@
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23FF7A00'/%3E%3Ctext x='16' y='23' font-family='Georgia' font-weight='900' font-size='18' text-anchor='middle' fill='%23111'%3EPL%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Statistiques de visite : Umami (sans cookie). Les clics importants sont suivis
+       via les attributs data-umami-event sur les liens (téléchargements, newsletter, YouTube). -->
+  <script defer src="https://analytics.minz.at/script.js" data-website-id="c653aebf-4b97-4e5b-be44-973750c75a25"></script>
 </head>
 <body>
 
   <!-- ============ EN-TÊTE ============ -->
   <header class="topbar">
-    <a class="brand" href="https://newsletter.premiereslignes.studio/">Premières Lignes</a>
+    <a data-umami-event="clic-newsletter" data-umami-event-position="logo" class="brand" href="https://newsletter.premiereslignes.studio/">Premières Lignes</a>
     <nav class="topbar-nav">
-      <a class="topbar-link" href="https://www.youtube.com/@premieres-lignes" target="_blank" rel="noopener">YouTube</a>
-      <a class="topbar-cta" href="https://newsletter.premiereslignes.studio/">Newsletter&nbsp;→</a>
+      <a data-umami-event="clic-youtube" data-umami-event-position="menu" class="topbar-link" href="https://www.youtube.com/@premieres-lignes" target="_blank" rel="noopener">YouTube</a>
+      <a data-umami-event="clic-newsletter" data-umami-event-position="menu" class="topbar-cta" href="https://newsletter.premiereslignes.studio/">Newsletter&nbsp;→</a>
     </nav>
   </header>
 
@@ -60,10 +64,10 @@
           pour publier un livre papier sans stock, en France.</p>
 
         <div class="actions">
-          <a class="btn btn-dark" href="guide-impression-a-la-demande.pdf" download>
+          <a data-umami-event="telechargement-pdf" data-umami-event-position="hero" class="btn btn-dark" href="guide-impression-a-la-demande.pdf" download>
             Télécharger le PDF
           </a>
-          <a class="btn btn-outline" href="guide-impression-a-la-demande.pdf" target="_blank" rel="noopener">
+          <a data-umami-event="lecture-pdf" data-umami-event-position="hero" class="btn btn-outline" href="guide-impression-a-la-demande.pdf" target="_blank" rel="noopener">
             Lire en ligne
           </a>
         </div>
@@ -74,7 +78,7 @@
         </ul>
       </div>
 
-      <a class="hero-cover" href="guide-impression-a-la-demande.pdf" download aria-label="Télécharger le guide">
+      <a data-umami-event="telechargement-pdf" data-umami-event-position="couverture" class="hero-cover" href="guide-impression-a-la-demande.pdf" download aria-label="Télécharger le guide">
         <img src="couverture.png" alt="Couverture du guide : L’impression à la demande en France" width="910" height="1287">
       </a>
     </div>
@@ -125,37 +129,37 @@
       en vrai, rien ne vaut le témoignage de celles et ceux qui se sont lancés. Sur la chaîne YouTube, des auteurs et des éditeurs racontent sans filtre comment ils écrivent,
       publient, fabriquent et vendent leurs livres. Une sélection pour commencer :</p>
     <div class="videos">
-      <a class="video" href="https://www.youtube.com/watch?v=Gsqd60DJkmA" target="_blank" rel="noopener">
+      <a class="video" data-umami-event="clic-interview" data-umami-event-video="Gsqd60DJkmA" href="https://www.youtube.com/watch?v=Gsqd60DJkmA" target="_blank" rel="noopener">
         <span class="thumb"><img src="img/youtube/Gsqd60DJkmA.jpg" alt="" width="640" height="360" loading="lazy"></span>
         <h3>Pourquoi 99 % des maisons d’édition vont disparaître</h3>
         <p class="guest">… et pas lui</p>
         <p>Un regard sans filtre sur la crise du modèle éditorial classique et sur ceux qui s’en sortent.</p>
       </a>
-      <a class="video" href="https://www.youtube.com/watch?v=BTQuLZikE0g" target="_blank" rel="noopener">
+      <a class="video" data-umami-event="clic-interview" data-umami-event-video="BTQuLZikE0g" href="https://www.youtube.com/watch?v=BTQuLZikE0g" target="_blank" rel="noopener">
         <span class="thumb"><img src="img/youtube/BTQuLZikE0g.jpg" alt="" width="640" height="360" loading="lazy"></span>
         <h3>Créer une maison d’édition sans subvention</h3>
         <p class="guest">Ephyra Éditions</p>
         <p>Lancer une maison indépendante en France sans aide publique : le parcours, les choix, les chiffres.</p>
       </a>
-      <a class="video" href="https://www.youtube.com/watch?v=Wa_bN7TvI58" target="_blank" rel="noopener">
+      <a class="video" data-umami-event="clic-interview" data-umami-event-video="Wa_bN7TvI58" href="https://www.youtube.com/watch?v=Wa_bN7TvI58" target="_blank" rel="noopener">
         <span class="thumb"><img src="img/youtube/Wa_bN7TvI58.jpg" alt="" width="640" height="360" loading="lazy"></span>
         <h3>Pourquoi tes ventes de livres ne te rapportent rien</h3>
         <p class="guest">Édition : pas rentable ?</p>
         <p>Où part l’argent d’un livre vendu, et pourquoi l’auteur en touche si peu.</p>
       </a>
-      <a class="video" href="https://www.youtube.com/watch?v=Q1Vd3R3NYPw" target="_blank" rel="noopener">
+      <a class="video" data-umami-event="clic-interview" data-umami-event-video="Q1Vd3R3NYPw" href="https://www.youtube.com/watch?v=Q1Vd3R3NYPw" target="_blank" rel="noopener">
         <span class="thumb"><img src="img/youtube/Q1Vd3R3NYPw.jpg" alt="" width="640" height="360" loading="lazy"></span>
         <h3>25 000 livres techniques vendus</h3>
         <p class="guest">Julien Danjou</p>
         <p>Son conseil n° 1 pour se lancer quand on veut publier et vendre soi-même.</p>
       </a>
-      <a class="video" href="https://www.youtube.com/watch?v=uvP7VV1efzY" target="_blank" rel="noopener">
+      <a class="video" data-umami-event="clic-interview" data-umami-event-video="uvP7VV1efzY" href="https://www.youtube.com/watch?v=uvP7VV1efzY" target="_blank" rel="noopener">
         <span class="thumb"><img src="img/youtube/uvP7VV1efzY.jpg" alt="" width="640" height="360" loading="lazy"></span>
         <h3>Concours, autoédition et survie</h3>
         <p class="guest">Corynn Thymeur</p>
         <p>Trente ans de vie d’autrice, entre concours littéraires et autoédition.</p>
       </a>
-      <a class="video" href="https://www.youtube.com/watch?v=k1ktCoAMZq4" target="_blank" rel="noopener">
+      <a class="video" data-umami-event="clic-interview" data-umami-event-video="k1ktCoAMZq4" href="https://www.youtube.com/watch?v=k1ktCoAMZq4" target="_blank" rel="noopener">
         <span class="thumb"><img src="img/youtube/k1ktCoAMZq4.jpg" alt="" width="640" height="360" loading="lazy"></span>
         <h3>Un livre audio pour 100 $ au lieu de 6 000</h3>
         <p class="guest">Audiobook &amp; IA</p>
@@ -163,8 +167,8 @@
       </a>
     </div>
     <div class="actions center">
-      <a class="btn btn-youtube" href="https://www.youtube.com/@premieres-lignes?sub_confirmation=1" target="_blank" rel="noopener">S’abonner à la chaîne</a>
-      <a class="btn btn-outline" href="https://www.youtube.com/@premieres-lignes/videos" target="_blank" rel="noopener">Toutes les vidéos</a>
+      <a data-umami-event="clic-youtube" data-umami-event-position="abonnement-chaine" class="btn btn-youtube" href="https://www.youtube.com/@premieres-lignes?sub_confirmation=1" target="_blank" rel="noopener">S’abonner à la chaîne</a>
+      <a data-umami-event="clic-youtube" data-umami-event-position="toutes-les-videos" class="btn btn-outline" href="https://www.youtube.com/@premieres-lignes/videos" target="_blank" rel="noopener">Toutes les vidéos</a>
     </div>
   </section>
 
@@ -176,7 +180,7 @@
         <p>Chaque semaine, la newsletter <strong>Premières Lignes</strong> décrypte l’édition
           indépendante : coulisses des interviews, conseils pratiques, chiffres et ressources
           exclusives pour les auteurs et les petits éditeurs.</p>
-        <a class="btn btn-orange" href="https://newsletter.premiereslignes.studio/">Je m’abonne gratuitement</a>
+        <a data-umami-event="clic-newsletter" data-umami-event-position="bloc-newsletter" class="btn btn-orange" href="https://newsletter.premiereslignes.studio/">Je m’abonne gratuitement</a>
         <p class="small">Gratuit, sans spam, désinscription en un clic.</p>
       </div>
       <ul class="perks">
@@ -191,16 +195,16 @@
   <section class="final">
     <h2>Prêt à vous <em>lancer</em> ?</h2>
     <div class="actions center">
-      <a class="btn btn-dark" href="guide-impression-a-la-demande.pdf" download>Télécharger le guide</a>
-      <a class="btn btn-outline" href="https://newsletter.premiereslignes.studio/">S’abonner à la newsletter</a>
+      <a data-umami-event="telechargement-pdf" data-umami-event-position="fin-de-page" class="btn btn-dark" href="guide-impression-a-la-demande.pdf" download>Télécharger le guide</a>
+      <a data-umami-event="clic-newsletter" data-umami-event-position="fin-de-page" class="btn btn-outline" href="https://newsletter.premiereslignes.studio/">S’abonner à la newsletter</a>
     </div>
   </section>
 
   <footer class="footer">
     <span class="brand">Premières Lignes</span>
     <span class="footer-links">
-      <a href="https://www.youtube.com/@premieres-lignes" target="_blank" rel="noopener">YouTube</a> ·
-      <a href="https://newsletter.premiereslignes.studio/">Newsletter</a>
+      <a data-umami-event="clic-youtube" data-umami-event-position="pied-de-page" href="https://www.youtube.com/@premieres-lignes" target="_blank" rel="noopener">YouTube</a> ·
+      <a data-umami-event="clic-newsletter" data-umami-event-position="pied-de-page" href="https://newsletter.premiereslignes.studio/">Newsletter</a>
     </span>
     <span>Informations indicatives, vérifiées en novembre 2026. Ce guide n’est pas un conseil juridique ou fiscal.</span>
   </footer>
